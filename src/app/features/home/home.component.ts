@@ -18,7 +18,7 @@ type EventCard = {
   featured: boolean;
   state: 'normal' | 'loading';
 };
-type InstitutionalKey = 'eventos' | 'sobre' | 'redes' | 'equipe' | 'parceiros';
+type InstitutionalKey = 'eventos' | 'sobre' | 'somos' | 'redes' | 'equipe' | 'parceiros';
 
 @Component({
   selector: 'app-home-component',
@@ -47,7 +47,6 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
   readonly emptyInstitutionalItems: readonly string[] = [];
   readonly headerLogoDefault = 'new-logo.png';
   readonly whatsappCommunityUrl = 'https://chat.whatsapp.com/GtlHPlfmXlp27vPZVBej19';
-  readonly whatsappTeamContactUrl = 'https://wa.me/fulldev';
   readonly discordCommunityUrl = 'https://discord.com/invite/2vMkX7kc8t';
   readonly vscodeThemeUrl =
     'https://marketplace.visualstudio.com/items?itemName=FullDev.beru-theme';
@@ -276,6 +275,14 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
         'Nosso objetivo é criar um ambiente colaborativo, acessível e ativo, onde dúvidas viram conversas, ideias viram projetos e conexões ajudam pessoas a crescerem profissionalmente.',
         'A comunidade promove eventos, hackathons, indicações de vagas, conteúdos técnicos, ações com parceiros e espaços de networking para aproximar talentos, empresas e iniciativas de tecnologia.',
         'Mais do que um grupo, a FullDev é um ponto de encontro para quem acredita que aprender em comunidade torna a jornada mais leve, prática e cheia de possibilidades.',
+      ],
+    },
+    somos: {
+      title: 'O que somos',
+      description: '',
+      items: [
+        'Somos um grupo, quase uma família, que compartilha e se ajuda dentro dos grupos do WhatsApp.',
+        'Participamos de eventos conseguindo cortesias através de parceiros da comunidade.',
       ],
     },
     redes: {
