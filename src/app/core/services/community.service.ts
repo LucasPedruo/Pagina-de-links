@@ -172,45 +172,15 @@ export class CommunityService {
           { url: '/images/Conversa3.png', timestamp: '2025-04-01T12:20:00Z' },
         ],
       },
-      {
-        id: '2',
-        name: 'Queens of Deploy',
-        description: 'Grupo exclusivo para mulheres desenvolvedoras',
-        imageUrl: '/images/CodeQueens.png',
-        memberCount: 504,
-        inviteLink: 'https://chat.whatsapp.com/KOKFfsXGD1PBVWvAXXNbcb',
-        recentImages: [
-          { url: '/images/Conversa1.png', timestamp: '2025-04-01T14:30:00Z' },
-          { url: '/images/Conversa2.png', timestamp: '2025-04-01T13:45:00Z' },
-          { url: '/images/Conversa3.png', timestamp: '2025-04-01T12:20:00Z' },
-        ],
-      },
-      {
-        id: '3',
-        name: 'RainbowStack',
-        description: 'Grupo para pessoas LGBT da comunidade',
-        imageUrl: '/images/RainbowStack.png',
-        memberCount: 102,
-        inviteLink: 'https://chat.whatsapp.com/BtWA88gNq3KGmAxAobB8X3',
-        recentImages: [
-          { url: '/images/Conversa1.png', timestamp: '2025-04-01T14:30:00Z' },
-          { url: '/images/Conversa2.png', timestamp: '2025-04-01T13:45:00Z' },
-          { url: '/images/Conversa3.png', timestamp: '2025-04-01T12:20:00Z' },
-        ],
-      },
     ];
   }
   private getMockStatistics(): any {
     return {
       totalMembers: 5000,
-      totalGroups: 3,
+      totalGroups: 1,
       activeMembers: 3500,
       monthlyGrowth: 12.5,
-      topGroups: [
-        { name: 'Comunidade no WhatsApp', members: 1024 },
-        { name: 'Queens of Deploy', members: 504 },
-        { name: 'RainbowStack', members: 102 },
-      ],
+      topGroups: [{ name: 'Comunidade no WhatsApp', members: 1024 }],
     };
   }
 

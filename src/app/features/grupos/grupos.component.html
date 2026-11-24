@@ -1,11 +1,4 @@
-<section
-  class="group-section"
-  [ngClass]="[
-    parentType,
-    parentType === 'home' && text === 'Queens of Deploy' ? 'group-section--queens' : '',
-    parentType === 'home' && text === 'RainbowStack' ? 'group-section--rainbow' : ''
-  ]"
->
+<section class="group-section" [ngClass]="parentType">
   <div class="group-section__content">
     <img [src]="src" class="group-section__logo" alt="Logo FullDev" />
     <div class="group-section__description">

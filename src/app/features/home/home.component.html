@@ -1,26 +1,11 @@
 <section class="home" aria-labelledby="header-title">
   <div class="wrapper-home">
     <header class="header">
-      <button
-        class="header__logo-button"
-        type="button"
-        (click)="onHeaderLogoClick()"
-        [attr.aria-label]="currentHeaderAriaLabel()"
-      >
-        <span
-          class="header__img-frame"
-          [class.header__img-frame--flip-forward]="
-            isHeaderFlipping && headerFlipDirection === 'forward'
-          "
-          [class.header__img-frame--flip-backward]="
-            isHeaderFlipping && headerFlipDirection === 'backward'
-          "
-          [class.header__img-frame--light-a]="isHeaderFlipping && headerLightVariant === 'a'"
-          [class.header__img-frame--light-b]="isHeaderFlipping && headerLightVariant === 'b'"
-        >
-          <img class="header__img" [src]="currentHeaderImage()" [alt]="currentHeaderAlt()" />
+      <span class="header__logo-button">
+        <span class="header__img-frame">
+          <img class="header__img" [src]="headerLogoDefault" alt="logo FullDev" />
         </span>
-      </button>
+      </span>
 
       <div class="header__content">
         <h1 class="header__title" id="header-title">FullDev</h1>
@@ -39,33 +24,11 @@
             <p class="header__stats-list__item-text">Desde 06/2024</p>
           </li>
         </ul>
-        <app-social-component></app-social-component>
       </div>
     </header>
 
     <section class="groups-showcase" aria-labelledby="groups-showcase-title">
       <nav class="home-menu" aria-label="Menu institucional">
-        <!--  -->
-        @if (genderPreference === 'female' || genderPreference === 'not_informed') {
-          <button
-            class="home-menu__item"
-            type="button"
-            (click)="openExternalLink(whatsappFemaleCommunityUrl)"
-          >
-            <span>Comunidade feminina no WhatsApp</span>
-            <img src="link-external.svg" alt="" aria-hidden="true" />
-          </button>
-        }
-        @if (genderPreference === 'lgbt' || genderPreference === 'not_informed') {
-          <button
-            class="home-menu__item"
-            type="button"
-            (click)="openExternalLink(whatsappLgbtCommunityUrl)"
-          >
-            <span>Comunidade LGBT no WhatsApp</span>
-            <img src="link-external.svg" alt="" aria-hidden="true" />
-          </button>
-        }
         <button
           class="home-menu__item"
           type="button"
@@ -82,16 +45,8 @@
           <span>Comunidade no Discord</span>
           <img src="link-external.svg" alt="" aria-hidden="true" />
         </button>
-        <button class="home-menu__item" type="button" (click)="openInstitutionalModal('projetos')">
-          <span>Projetos</span>
-          <img src="link-external.svg" alt="" aria-hidden="true" />
-        </button>
         <button class="home-menu__item" type="button" (click)="openInstitutionalModal('sobre')">
           <span>Sobre nós</span>
-          <img src="link-external.svg" alt="" aria-hidden="true" />
-        </button>
-        <button class="home-menu__item" type="button" (click)="openTeamOpeningsModal()">
-          <span>Faça parte da equipe</span>
           <img src="link-external.svg" alt="" aria-hidden="true" />
         </button>
         <button
@@ -102,14 +57,6 @@
           <span>Entre em contato com a equipe</span>
           <img src="link-external.svg" alt="" aria-hidden="true" />
         </button>
-        <button
-          class="home-menu__item"
-          type="button"
-          (click)="openExternalLink(newsletterSubscribeUrl)"
-        >
-          <span>Newsletter</span>
-          <img src="link-external.svg" alt="" aria-hidden="true" />
-        </button>
         <!-- <button class="home-menu__item" type="button" (click)="openInstitutionalModal('loja')">
           <span>Loja</span>
           <img src="link-external.svg" alt="" aria-hidden="true" />
@@ -118,15 +65,6 @@
           <span>School</span>
           <img src="link-external.svg" alt="" aria-hidden="true" />
         </button> -->
-        <button
-          class="home-menu__item home-menu__item--muted"
-          type="button"
-          (click)="resetGenderPreference()"
-          aria-haspopup="dialog"
-        >
-          <span>Resetar preferência sexual</span>
-          <img src="close.svg" alt="" aria-hidden="true" />
-        </button>
       </nav>
     </section>
 
@@ -240,102 +178,6 @@
 
     <app-footer-component></app-footer-component>
 
-    <app-custom-modal
-      title="Personalizar experiência"
-      [isOpen]="showGenderPreferenceModal"
-      [size]="'md'"
-      (closeModal)="closeGenderPreferenceModal()"
-    >
-      <div class="gender-preference-modal" slot="body">
-        <p class="gender-preference-modal__text">
-          Para ajustar a experiência visual da comunidade, informe como você prefere seguir.
-        </p>
-        <p class="gender-preference-modal__text gender-preference-modal__text--secondary">
-          A escolha define quais grupos aparecem primeiro e salva a preferência neste dispositivo.
-        </p>
-
-        <div class="gender-preference-modal__actions">
-          <div class="gender-preference-modal__option">
-            <div class="gender-preference-modal__button-tooltip">
-              <app-custom-button-component
-                class="gender-preference-modal__action--female"
-                sizes="large"
-                text="Mulher cis"
-                color="link"
-                ariaDescribedBy="gender-tooltip-female"
-                (buttonClick)="selectGenderPreference('female')"
-              ></app-custom-button-component>
-              <span
-                class="gender-preference-modal__tooltip"
-                id="gender-tooltip-female"
-                role="tooltip"
-              >
-                Pessoa que se identifica como mulher e foi registrada como mulher ao nascer.
-              </span>
-            </div>
-          </div>
-
-          <div class="gender-preference-modal__option">
-            <div class="gender-preference-modal__button-tooltip">
-              <app-custom-button-component
-                sizes="large"
-                text="Homem cis"
-                color="link"
-                ariaDescribedBy="gender-tooltip-male"
-                (buttonClick)="selectGenderPreference('male')"
-              ></app-custom-button-component>
-              <span
-                class="gender-preference-modal__tooltip"
-                id="gender-tooltip-male"
-                role="tooltip"
-              >
-                Pessoa que se identifica como homem e foi registrada como homem ao nascer.
-              </span>
-            </div>
-          </div>
-
-          <div class="gender-preference-modal__option">
-            <div class="gender-preference-modal__button-tooltip">
-              <app-custom-button-component
-                sizes="large"
-                text="Sou LGBT"
-                color="link"
-                ariaDescribedBy="gender-tooltip-lgbt"
-                (buttonClick)="selectGenderPreference('lgbt')"
-              ></app-custom-button-component>
-              <span
-                class="gender-preference-modal__tooltip"
-                id="gender-tooltip-lgbt"
-                role="tooltip"
-              >
-                Pessoas lésbicas, gays, bissexuais, trans ou de outras vivências de gênero e
-                sexualidade.
-              </span>
-            </div>
-          </div>
-
-          <div class="gender-preference-modal__option">
-            <div class="gender-preference-modal__button-tooltip">
-              <app-custom-button-component
-                sizes="large"
-                text="Prefiro não informar"
-                color="link"
-                ariaDescribedBy="gender-tooltip-not-informed"
-                (buttonClick)="selectGenderPreference('not_informed')"
-              ></app-custom-button-component>
-              <span
-                class="gender-preference-modal__tooltip"
-                id="gender-tooltip-not-informed"
-                role="tooltip"
-              >
-                Mantém a experiência padrão sem compartilhar uma preferência sexual.
-              </span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </app-custom-modal>
-
     <app-custom-modal title="Grupos" [isOpen]="showModal" (closeModal)="closeModal()">
       @for (item of modalGroups(); track item) {
         <app-grupos-component
@@ -344,78 +186,8 @@
           [description]="item.description"
           [src]="item.src"
           [linkGroup]="item.linkGroup"
-          [buttonState]="groupButtonState(item.text)"
-          (blockedAccessRequested)="showRestrictedGroupNotification($event)"
         ></app-grupos-component>
       }
-    </app-custom-modal>
-
-    <app-custom-modal
-      title="Faça parte da equipe"
-      [isOpen]="showTeamOpeningsModal"
-      [size]="'md'"
-      (closeModal)="closeTeamOpeningsModal()"
-    >
-      <div class="team-openings" slot="body">
-        <p class="team-openings__description">
-          Escolha uma vaga aberta para iniciar sua inscrição.
-        </p>
-
-        <div class="team-openings__list">
-          @for (opening of teamOpenings; track opening.title) {
-            <article class="team-opening-card">
-              <div class="team-opening-card__content">
-                <div class="team-opening-card__description">
-                  <h3 class="team-opening-card__title">{{ opening.title }}</h3>
-                  <p class="team-opening-card__subtitle">{{ opening.description }}</p>
-                </div>
-                <app-custom-button-component
-                  class="team-opening-card__action"
-                  sizes="medium"
-                  text="Abrir"
-                  color="link"
-                  [state]="opening.formUrl ? 'normal' : 'disabled'"
-                  [allowDisabledClick]="!opening.formUrl"
-                  (buttonClick)="openExternalLink(opening.formUrl)"
-                  (disabledClick)="showDisabledOpeningToast()"
-                ></app-custom-button-component>
-              </div>
-            </article>
-          }
-        </div>
-      </div>
-    </app-custom-modal>
-
-    @if (accessRestrictionNotice) {
-      <div class="access-restriction-notice" role="status" aria-live="polite">
-        {{ accessRestrictionNotice }}
-      </div>
-    }
-
-    <app-custom-modal
-      title="Confirmação de acesso"
-      [isOpen]="showQueensAccessModal"
-      [size]="'md'"
-      (closeModal)="closeQueensAccessModal()"
-    >
-      <div class="queens-access-modal" slot="body">
-        <p class="queens-access-modal__text">
-          O Queens of Deploy é um grupo destinado a mulheres, criado para fortalecer conexões, apoio
-          e troca de experiências em tecnologia.
-        </p>
-        <p class="queens-access-modal__text queens-access-modal__text--secondary">
-          Para continuar, confirme que você é do sexo feminino. Essa escolha ficará salva neste
-          dispositivo e ativa o tema rosa da experiência.
-        </p>
-        <app-custom-button-component
-          class="queens-access-modal__action queens-access-modal__action--female"
-          sizes="large"
-          text="Confirmo que sou do sexo feminino"
-          color="primary"
-          customClass="primary-pink"
-          (buttonClick)="confirmQueensAccess()"
-        ></app-custom-button-component>
-      </div>
     </app-custom-modal>
 
     <app-custom-modal
@@ -502,48 +274,6 @@
                 }
               </section>
             }
-          </div>
-        } @else if (activeInstitutionalKey === 'projetos') {
-          @if (activeInstitutionalContent().description) {
-            <p class="institutional-modal__description">
-              {{ activeInstitutionalContent().description }}
-            </p>
-          }
-
-          <ul class="institutional-modal__list">
-            @for (item of activeInstitutionalItems(); track item) {
-              <li class="institutional-modal__list-item">{{ item }}</li>
-            }
-          </ul>
-
-          <div class="team-sections">
-            <section class="team-sections__group">
-              <h3 class="team-sections__title">Extensões VS Code</h3>
-
-              @for (project of projectCards; track project.name) {
-                <article class="team-card">
-                  <div class="team-card__content">
-                    <img
-                      [src]="project.image"
-                      class="team-card__logo"
-                      [alt]="'Logo de ' + project.name"
-                    />
-                    <div class="team-card__description">
-                      <h4 class="team-card__description__title">{{ project.name }}</h4>
-                      <p class="team-card__description__subtitle">{{ project.stack }}</p>
-                    </div>
-                    <app-custom-button-component
-                      class="team-card__action"
-                      sizes="medium"
-                      text="Abrir"
-                      color="link"
-                      [showIcon]="true"
-                      (buttonClick)="openExternalLink(project.link)"
-                    ></app-custom-button-component>
-                  </div>
-                </article>
-              }
-            </section>
           </div>
         } @else if (activeInstitutionalKey === 'parceiros') {
           @if (activeInstitutionalContent().description) {

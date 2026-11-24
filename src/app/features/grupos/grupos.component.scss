@@ -119,56 +119,6 @@
     }
 }
 
-.group-section.home.group-section--queens {
-    border-color: rgba(255, 182, 193, 0.42);
-    background:
-      radial-gradient(circle at top right, rgba(255, 214, 224, 0.22), transparent 46%),
-      linear-gradient(180deg, rgba(255, 224, 230, 0.08), rgba(255, 255, 255, 0.02));
-
-    .group-section__logo {
-        box-shadow: none;
-    }
-
-    .group-section__description__title {
-        color: #ffe2ec;
-    }
-
-    .group-section__description__subtitle {
-        color: #e7b8c9;
-    }
-
-    .group-section__action ::ng-deep .button {
-        border-color: rgba(255, 192, 203, 0.32);
-        background: rgba(255, 214, 224, 0.08);
-        color: #ffe2ec;
-    }
-}
-
-.group-section.home.group-section--rainbow {
-    border-color: rgba(255, 255, 255, 0.28);
-    background:
-      radial-gradient(circle at top right, rgba(34, 211, 238, 0.2), transparent 45%),
-      linear-gradient(135deg, rgba(239, 68, 68, 0.16), rgba(245, 158, 11, 0.12), rgba(34, 197, 94, 0.12), rgba(59, 130, 246, 0.14), rgba(168, 85, 247, 0.16));
-
-    .group-section__logo {
-        box-shadow: none;
-    }
-
-    .group-section__description__title {
-        color: #ffffff;
-    }
-
-    .group-section__description__subtitle {
-        color: #d8f3ff;
-    }
-
-    .group-section__action ::ng-deep .button {
-        border-color: rgba(255, 255, 255, 0.28);
-        background: rgba(255, 255, 255, 0.1);
-        color: #ffffff;
-    }
-}
-
 .modal{
     background-color: #1F1F1F;
     border: 1px solid var(--dark-gray);

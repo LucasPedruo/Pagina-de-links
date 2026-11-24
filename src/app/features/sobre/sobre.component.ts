@@ -3,17 +3,10 @@ import { CustomButtonComponent } from '../../shared/components/custom-button/cus
 import { FooterComponent } from '../../shared/components/footer/footer-component';
 import { ModalContactComponent } from '../../shared/components/modal-contact/modal-contact';
 import { NavMenuComponent } from '../../shared/components/nav-menu/nav-menu-component';
-import { SocialComponent } from '../../shared/components/social-component/social-component';
 
 @Component({
   selector: 'app-sobre-component',
-  imports: [
-    CustomButtonComponent,
-    FooterComponent,
-    NavMenuComponent,
-    SocialComponent,
-    ModalContactComponent,
-  ],
+  imports: [CustomButtonComponent, FooterComponent, NavMenuComponent, ModalContactComponent],
   templateUrl: './sobre.component.html',
   styleUrl: './sobre.component.scss',
 })

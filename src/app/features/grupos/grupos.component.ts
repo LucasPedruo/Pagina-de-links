@@ -11,8 +11,6 @@ import { ModalMembershipComponent } from '../../shared/components/modal-membersh
   standalone: true
 })
 export class GruposComponent {
-  private readonly queensStorageKey = 'queens-of-deploy-confirmed';
-
   @Input() text = 'Grupos';
   @Input() description = 'Grupo no WhatsApp';
   @Input() buttonText = 'Entrar';
@@ -23,18 +21,9 @@ export class GruposComponent {
   @Input() linkGroup: string = '';
   @Input() externalLink: string = '';
   @Input() buttonState: 'loading' | 'normal' | 'disabled' = 'normal';
-  @Output() queensAccessRequested = new EventEmitter<string>();
   @Output() blockedAccessRequested = new EventEmitter<string>();
 
   isMembershipModalOpen = false;
-
-  private isQueensGroup() {
-    return this.text === 'Queens of Deploy';
-  }
-
-  private hasQueensConfirmation() {
-    return typeof window !== 'undefined' && window.localStorage.getItem(this.queensStorageKey) === 'true';
-  }
 
   onGroupButtonClick() {
     if (this.buttonState === 'disabled') {
@@ -48,11 +37,6 @@ export class GruposComponent {
   private goToGroupLink() {
     if (this.externalLink) {
       window.open(this.externalLink, '_blank');
-      return;
-    }
-
-    if (this.isQueensGroup() && !this.hasQueensConfirmation()) {
-      this.queensAccessRequested.emit(this.linkGroup);
       return;
     }
 
