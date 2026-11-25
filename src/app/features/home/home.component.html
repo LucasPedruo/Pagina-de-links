@@ -49,8 +49,8 @@
           <span>Sobre nós</span>
           <img src="link-external.svg" alt="" aria-hidden="true" />
         </button>
-        <button class="home-menu__item" type="button" (click)="openInstitutionalModal('somos')">
-          <span>O que somos</span>
+        <button class="home-menu__item" type="button" (click)="openInstitutionalModal('mural')">
+          <span>Mural de eventos</span>
           <img src="link-external.svg" alt="" aria-hidden="true" />
         </button>
         <!-- <button class="home-menu__item" type="button" (click)="openInstitutionalModal('loja')">
@@ -396,6 +396,43 @@
                   ></app-custom-button-component>
                 </div>
               </article>
+            }
+          </div>
+        } @else if (activeInstitutionalKey === 'mural') {
+          @if (activeInstitutionalContent().description) {
+            <p class="institutional-modal__description">
+              {{ activeInstitutionalContent().description }}
+            </p>
+          }
+
+          <div class="event-mural">
+            @for (post of eventPosts; track post.link) {
+              <a
+                class="event-post-card"
+                [href]="post.link"
+                target="_blank"
+                rel="noopener noreferrer"
+                [attr.aria-label]="'Abrir postagem de ' + post.event + ' no ' + post.network"
+              >
+                <img
+                  class="event-post-card__image"
+                  [src]="post.image"
+                  [alt]="'Foto de ' + post.event"
+                />
+                <span class="event-post-card__badge">{{ post.event }}</span>
+                <div class="event-post-card__overlay">
+                  <img
+                    class="event-post-card__network-icon"
+                    [src]="post.network + '.svg'"
+                    alt=""
+                    aria-hidden="true"
+                  />
+                  <div class="event-post-card__meta">
+                    <span class="event-post-card__name">{{ post.name }}</span>
+                    <span class="event-post-card__handle">&#64;{{ post.handle }}</span>
+                  </div>
+                </div>
+              </a>
             }
           </div>
         } @else {

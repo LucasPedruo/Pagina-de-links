@@ -18,7 +18,15 @@ type EventCard = {
   featured: boolean;
   state: 'normal' | 'loading';
 };
-type InstitutionalKey = 'eventos' | 'sobre' | 'somos' | 'redes' | 'equipe' | 'parceiros';
+type EventPost = {
+  event: string;
+  name: string;
+  handle: string;
+  network: 'instagram' | 'linkedin';
+  image: string;
+  link: string;
+};
+type InstitutionalKey = 'eventos' | 'sobre' | 'mural' | 'redes' | 'equipe' | 'parceiros';
 
 @Component({
   selector: 'app-home-component',
@@ -255,6 +263,40 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
     },
   ] as const;
   eventCards: readonly EventCard[] = [];
+  eventPosts: readonly EventPost[] = [
+    {
+      event: 'Web Summit Rio',
+      name: 'Lucas Pedro',
+      handle: 'devlucaspedro',
+      network: 'instagram',
+      image: 'eventos/web-summit-rio.jpg',
+      link: 'https://www.instagram.com/p/DZe1MneDtUi/?img_index=1',
+    },
+    {
+      event: 'CodeConDev',
+      name: 'Lucas Pedro',
+      handle: 'devlucaspedro',
+      network: 'instagram',
+      image: 'eventos/codecondev.jpg',
+      link: 'https://www.instagram.com/p/DenJtF5mG4h/?img_index=1',
+    },
+    {
+      event: 'Codecon Summit',
+      name: 'João Lima',
+      handle: 'joao-lima',
+      network: 'linkedin',
+      image: 'eventos/codecon.jpg',
+      link: 'https://www.linkedin.com/posts/jo%C3%A3o-lima-17937b1a3_codeconsummit-codecon2026-tecnologia-ugcPost-7496356376072572928-L9z8/?utm_source=share&utm_medium=member_desktop&rcm=ACoAAC-TFi0BNN_OF01bdq887ZMdViDx0E_pccY',
+    },
+    {
+      event: 'AWS Summit SP',
+      name: 'João Vasconcelos',
+      handle: 'jvemmanuell',
+      network: 'instagram',
+      image: 'eventos/aws-summit-sp.jpg',
+      link: 'https://www.instagram.com/p/Dc16BzqDg96/?img_index=1',
+    },
+  ] as const;
   institutionalContent = {
     eventos: {
       title: 'Eventos',
@@ -277,13 +319,10 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
         'Mais do que um grupo, a FullDev é um ponto de encontro para quem acredita que aprender em comunidade torna a jornada mais leve, prática e cheia de possibilidades.',
       ],
     },
-    somos: {
-      title: 'O que somos',
+    mural: {
+      title: 'Mural de eventos',
       description: '',
-      items: [
-        'Somos um grupo, quase uma família, que compartilha e se ajuda dentro dos grupos do WhatsApp.',
-        'Participamos de eventos conseguindo cortesias através de parceiros da comunidade.',
-      ],
+      items: [],
     },
     redes: {
       title: 'Redes sociais',
