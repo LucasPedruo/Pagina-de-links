@@ -296,7 +296,17 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
       image: 'eventos/aws-summit-sp.jpg',
       link: 'https://www.instagram.com/p/Dc16BzqDg96/?img_index=1',
     },
+    {
+      event: 'DevFest RJ',
+      name: 'Carlos Israel',
+      handle: 'carlos-israel',
+      network: 'linkedin',
+      image: 'eventos/devfest.jpg',
+      link: 'https://lnkd.in/p/dhk2W4Bv',
+    },
   ] as const;
+  activeEventMuralPage = 0;
+  readonly eventMuralPageSize = 4;
   institutionalContent = {
     eventos: {
       title: 'Eventos',
@@ -396,6 +406,10 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
   openInstitutionalModal(key: InstitutionalKey) {
     this.activeInstitutionalKey = key;
     this.showInstitutionalModal = true;
+
+    if (key === 'mural') {
+      this.activeEventMuralPage = 0;
+    }
   }
 
   closeInstitutionalModal() {
@@ -409,6 +423,26 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
   activeInstitutionalItems() {
     const content = this.activeInstitutionalContent();
     return 'items' in content ? content.items : this.emptyInstitutionalItems;
+  }
+
+  get eventMuralPages(): EventPost[][] {
+    const pages: EventPost[][] = [];
+
+    for (let i = 0; i < this.eventPosts.length; i += this.eventMuralPageSize) {
+      pages.push(this.eventPosts.slice(i, i + this.eventMuralPageSize));
+    }
+
+    return pages;
+  }
+
+  showEventMuralPage(index: number) {
+    const total = this.eventMuralPages.length;
+
+    if (!total) {
+      return;
+    }
+
+    this.activeEventMuralPage = (index + total) % total;
   }
 
   openExternalLink(url: string) {

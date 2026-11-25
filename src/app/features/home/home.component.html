@@ -406,7 +406,7 @@
           }
 
           <div class="event-mural">
-            @for (post of eventPosts; track post.link) {
+            @for (post of eventMuralPages[activeEventMuralPage]; track post.link) {
               <a
                 class="event-post-card"
                 [href]="post.link"
@@ -435,6 +435,41 @@
               </a>
             }
           </div>
+
+          @if (eventMuralPages.length > 1) {
+            <div class="event-mural__pager">
+              <button
+                class="event-mural__nav-btn"
+                type="button"
+                aria-label="Página anterior do mural"
+                (click)="showEventMuralPage(activeEventMuralPage - 1)"
+              >
+                <span aria-hidden="true">‹</span>
+              </button>
+
+              <div class="event-mural__indicators">
+                @for (page of eventMuralPages; track $index; let index = $index) {
+                  <button
+                    class="event-mural__indicator"
+                    type="button"
+                    [class.event-mural__indicator--active]="activeEventMuralPage === index"
+                    [attr.aria-label]="'Mostrar página ' + (index + 1) + ' do mural'"
+                    [attr.aria-current]="activeEventMuralPage === index ? 'true' : null"
+                    (click)="showEventMuralPage(index)"
+                  ></button>
+                }
+              </div>
+
+              <button
+                class="event-mural__nav-btn"
+                type="button"
+                aria-label="Próxima página do mural"
+                (click)="showEventMuralPage(activeEventMuralPage + 1)"
+              >
+                <span aria-hidden="true">›</span>
+              </button>
+            </div>
+          }
         } @else {
           @if (activeInstitutionalContent().description) {
             <p class="institutional-modal__description">
