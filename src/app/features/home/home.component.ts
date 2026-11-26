@@ -69,7 +69,6 @@ export class HomeComponent {
   readonly emptyInstitutionalItems: readonly string[] = [];
   readonly headerLogoDefault = 'new-logo.png';
   readonly whatsappCommunityUrl = 'https://chat.whatsapp.com/GtlHPlfmXlp27vPZVBej19';
-  readonly discordCommunityUrl = 'https://discord.com/invite/2vMkX7kc8t';
   readonly vscodeThemeUrl =
     'https://marketplace.visualstudio.com/items?itemName=FullDev.beru-theme';
   showModal: boolean = false;
