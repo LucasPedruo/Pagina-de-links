@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { NgxFastMarqueeModule } from 'ngx-fast-marquee';
 
 import { environment } from '../../../environments/environment';
@@ -26,7 +26,23 @@ type EventPost = {
   image: string;
   link: string;
 };
-type InstitutionalKey = 'eventos' | 'sobre' | 'mural' | 'redes' | 'equipe' | 'parceiros';
+type InstitutionalKey = 'eventos' | 'sobre' | 'mural' | 'redes' | 'equipe' | 'parceiros' | 'bot';
+type BotDailyStats = {
+  jobsDiscovered: number;
+  jobsSent: number;
+  eventsDiscovered: number;
+  eventsSent: number;
+  eventRemindersSent: number;
+  networkingMessagesSent: number;
+  failedMessages: number;
+};
+type BotStatusResponse = {
+  whatsapp: { status: string; online: boolean };
+  today: BotDailyStats;
+  timezone: string;
+  generatedAt: string;
+};
+type BotStatusState = 'loading' | 'loaded' | 'error';
 
 @Component({
   selector: 'app-home-component',
@@ -282,6 +298,9 @@ export class HomeComponent {
   ] as const;
   activeEventMuralPage = 0;
   readonly eventMuralPageSize = 4;
+  readonly botStatusUrl = '/bot/public/status';
+  botStatusState = signal<BotStatusState>('loading');
+  botStatus = signal<BotStatusResponse | null>(null);
   institutionalContent = {
     eventos: {
       title: 'Eventos',
@@ -306,6 +325,11 @@ export class HomeComponent {
     },
     mural: {
       title: 'Mural de eventos',
+      description: '',
+      items: [],
+    },
+    bot: {
+      title: 'Status do bot',
       description: '',
       items: [],
     },
@@ -373,6 +397,30 @@ export class HomeComponent {
     if (key === 'mural') {
       this.activeEventMuralPage = 0;
     }
+
+    if (key === 'bot') {
+      this.loadBotStatus();
+    }
+  }
+
+  loadBotStatus() {
+    this.botStatusState.set('loading');
+
+    fetch(this.botStatusUrl)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`Bot status request failed with ${response.status}`);
+        }
+
+        return response.json() as Promise<BotStatusResponse>;
+      })
+      .then((data) => {
+        this.botStatus.set(data);
+        this.botStatusState.set('loaded');
+      })
+      .catch(() => {
+        this.botStatusState.set('error');
+      });
   }
 
   closeInstitutionalModal() {

@@ -53,6 +53,10 @@
           <span>Mural de eventos</span>
           <img src="link-external.svg" alt="" aria-hidden="true" />
         </button>
+        <button class="home-menu__item" type="button" (click)="openInstitutionalModal('bot')">
+          <span>Status do bot</span>
+          <img src="link-external.svg" alt="" aria-hidden="true" />
+        </button>
         <!-- <button class="home-menu__item" type="button" (click)="openInstitutionalModal('loja')">
           <span>Loja</span>
           <img src="link-external.svg" alt="" aria-hidden="true" />
@@ -393,6 +397,63 @@
               </button>
             </div>
           }
+        } @else if (activeInstitutionalKey === 'bot') {
+          <div class="bot-status">
+            @switch (botStatusState()) {
+              @case ('loading') {
+                <p class="bot-status__message">Carregando status do bot…</p>
+              }
+              @case ('error') {
+                <p class="bot-status__message bot-status__message--error">
+                  Não foi possível carregar o status agora. Tenta de novo mais tarde.
+                </p>
+              }
+              @case ('loaded') {
+                @if (botStatus(); as status) {
+                  <div class="bot-status__header">
+                    <span
+                      class="bot-status__dot"
+                      [class.bot-status__dot--online]="status.whatsapp.online"
+                    ></span>
+                    <span class="bot-status__label">
+                      {{ status.whatsapp.online ? 'Online' : 'Offline' }}
+                    </span>
+                  </div>
+
+                  <p class="bot-status__caption">Atividade de hoje</p>
+
+                  <div class="bot-status__grid">
+                    <div class="bot-status__stat">
+                      <span class="bot-status__stat-value">{{ status.today.jobsSent }}</span>
+                      <span class="bot-status__stat-label">Vagas enviadas</span>
+                    </div>
+                    <div class="bot-status__stat">
+                      <span class="bot-status__stat-value">{{ status.today.eventsSent }}</span>
+                      <span class="bot-status__stat-label">Eventos enviados</span>
+                    </div>
+                    <div class="bot-status__stat">
+                      <span class="bot-status__stat-value">
+                        {{ status.today.networkingMessagesSent }}
+                      </span>
+                      <span class="bot-status__stat-label">Mensagens de networking</span>
+                    </div>
+                    <div class="bot-status__stat">
+                      <span class="bot-status__stat-value">
+                        {{ status.today.eventRemindersSent }}
+                      </span>
+                      <span class="bot-status__stat-label">Lembretes de evento</span>
+                    </div>
+                  </div>
+
+                  @if (status.today.failedMessages > 0) {
+                    <p class="bot-status__warning">
+                      {{ status.today.failedMessages }} mensagens falharam hoje.
+                    </p>
+                  }
+                }
+              }
+            }
+          </div>
         } @else {
           @if (activeInstitutionalContent().description) {
             <p class="institutional-modal__description">
